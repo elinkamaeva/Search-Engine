@@ -4,6 +4,7 @@ import pickle
 from typing import List, Optional, Union, Tuple, Type
 from scipy.sparse import csr_matrix
 from rank_bm25 import BM25Okapi
+import gensim
 from gensim.models import Word2Vec, FastText, KeyedVectors
 from sklearn.metrics.pairwise import cosine_similarity
 import torch
@@ -224,7 +225,7 @@ class BM25Indexer(BaseIndexer):
 
 class VectorIndexer(BaseIndexer):
     def __init__(self, model: Type[Union[Word2Vec, FastText]], corpus: Optional[List[str]] = None, 
-                 pretrained_model: Optional[str] = None, size: int = 100, 
+                 pretrained_model: Optional[str] = None, my_model_path: Optional[str] = None, size: int = 100, 
                  window: int = 5, min_count: int = 1, workers: int = 4) -> None:
         """
         Инициализация индексатора векторов.
@@ -232,6 +233,7 @@ class VectorIndexer(BaseIndexer):
         :param model: Класс модели для использования (Word2Vec или FastText).
         :param corpus: Опциональный список документов для индексации.
         :param pretrained_model: Путь к файлу предварительно обученной модели.
+        :param my_model_path: Путь к файлу для обученной нами модели.
         :param size: Размер вектора в модели.
         :param window: Максимальное расстояние между текущим и прогнозируемым словом в предложении.
         :param min_count: Минимальное количество упоминаний слова в корпусе для его включения в модель.
@@ -242,7 +244,7 @@ class VectorIndexer(BaseIndexer):
         self.model_type = model
         self.pretrained_model = pretrained_model
         self.model = None
-        self.my_model_path = None
+        self.my_model_path = my_model_path
 
         if corpus:
             self.lemmatized_corpus = [self.preprocess_text(doc) for doc in self.corpus]
