@@ -21,6 +21,31 @@ nltk.download('stopwords')
 morph = pymorphy2.MorphAnalyzer()
 stops = set(stopwords.words('russian'))
 
+
+# Определение путей к файлам индексов и моделей
+BM25_PICKLE = "data/bm25_index.pkl"
+W2V_MODEL_PATH = "data/word2vec.bin"
+W2V_EMBEDDINGS = "data/w2v_embeddings.npy"
+FT_MODEL_PATH = "data/fasttext.model"
+FT_EMBEDDINGS = "data/ft_embeddings.npy"
+BERT_MODEL_PATH = "ai-forever/sbert_large_nlu_ru"
+BERT_EMBEDDINGS = "data/sbert_embeddings.npy"
+CORPUS_PATH = "data/corpus.txt"
+
+# Инициализация и загрузка индексов при импорте модуля
+bm25_indexer = BM25Indexer()
+bm25_indexer.load_index(BM25_PICKLE)
+
+word2vec_indexer = Word2VecIndexer()
+word2vec_indexer.load_index(W2V_EMBEDDINGS, W2V_MODEL_PATH, CORPUS_PATH)
+
+fasttext_indexer = FastTextIndexer()
+fasttext_indexer.load_index(FT_EMBEDDINGS, FT_MODEL_PATH, CORPUS_PATH)
+
+bert_indexer = BERTIndexer(BERT_MODEL_PATH)
+bert_indexer.load_index(BERT_EMBEDDINGS, CORPUS_PATH)
+
+
 class BaseIndexer:
     def __init__(self, corpus: Optional[List[str]] = None) -> None:
         """
