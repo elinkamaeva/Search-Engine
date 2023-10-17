@@ -1,0 +1,8 @@
+gensim==4.3.2
+rank_bm25==0.2.2
+transformers==4.34.0
+torch==2.0.1
+numpy==1.23.5
+nltk==3.8.1
+pymorphy2==0.9.1
+scikit-learn==1.2.2
