@@ -1,1 +1,32 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/iHpKfUUO)
+# CLI Search Tool
+CLI Search Tool предоставляет интерфейс командной строки для поиска в корпусе документов с использованием различных методов индексации: BM25, Word2Vec, FastText и BERT.
+
+## Структура кода
+- **BM25**: Использует алгоритм BM25 для индексации и поиска в корпусе.  
+- **Word2VecIndexer**: Использует Word2Vec для векторизации документов и запросов.
+- **FastTextIndexer**: Использует FastText для векторизации документов и запросов.
+- **BERTIndexer**: Использует SBERT для векторизации документов и запросов.
+- **search**: Функция для выполнения поиска на основе выбранного индексатора.
+
+## Использование
+1. Установите необходимые зависимости:
+```bash
+pip install -r requirements.txt
+```
+
+2. Для запуска инструмента поиска через командную строку используйте следующую команду:
+```bash
+python main.py "your query" --indexer=indexer_type
+```
+
+### Параметры:
+- **your query**: Ваш запрос для поиска.
+- **--indexer**: Тип индексатора. Доступные опции: bm25, word2vec, fasttext, bert. По умолчанию используется bm25.
+
+Пример:
+```bash
+python main.py "футбольный чемпионат" --indexer=bm25
+```
+Этот пример ищет документы, связанные с "футбольным чемпионатом", используя индексатор BM25.
+
+**!WARNING:** Чтобы код исправно работал нужно скачать папку с файлами по [ссылке](https://drive.google.com/drive/folders/1w1VkievLj5kdPHrwxY11okAjSxBly78J?usp=drive_link). Эти файлы должны лежать в папке *data*, а Python файлы *main.py* и *indexers.py* — в текущей директории.
