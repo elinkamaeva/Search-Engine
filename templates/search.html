@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Введите поисковый запрос</h1>
+    <!-- Создаем форму для отправки данных методом POST на URL, связанный с функцией 'results' -->
+    <form action="{{ url_for('results') }}" method="POST" style="margin-top: 20px;">
+        <div>
+            <!-- Поле для ввода текста поискового запроса -->
+            <input type="text" name="query" required class="form-input">
+        </div>
+        <div>
+            <!-- Выпадающий список для выбора используемого индексатора -->
+            <select name="indexer" class="form-select">
+                <option value="bm25">BM25</option>
+                <option value="word2vec">Word2Vec</option>
+                <option value="fasttext">FastText</option>
+                <option value="bert">BERT</option>
+            </select>
+        </div>
+        <!-- Кнопка для отправки формы -->
+        <button type="submit" class="form-button">Поиск</button>
+    </form>
+{% endblock %}

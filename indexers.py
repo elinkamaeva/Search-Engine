@@ -426,10 +426,14 @@ class BERTIndexer(BaseIndexer):
         :param embeddings_filename: Имя файла для сохранения векторных представлений.
         :param corpus_filename: Имя файла для сохранения корпуса.
         """
-        np.save(embeddings_filename, self.corpus_embeddings)
-        with open(corpus_filename, 'w', encoding='utf-8') as f:
-            for doc in self.corpus:
-                f.write(doc + '\n')
+        try:
+            np.save(embeddings_filename, self.corpus_embeddings)
+            with open(corpus_filename, 'w', encoding='utf-8') as f:
+                for doc in self.corpus:
+                    f.write(doc + '\n')
+            print(f"Данные успешно сохранены в {embeddings_filename} и {corpus_filename}")
+        except Exception as e:
+            print(f"Ошибка при сохранении данных: {e}")
 
     def load_index(self, embeddings_filename: str, corpus_filename: str) -> None:
         """
@@ -438,6 +442,12 @@ class BERTIndexer(BaseIndexer):
         :param embeddings_filename: Имя файла с векторными представлениями для загрузки.
         :param corpus_filename: Имя файла с корпусом для загрузки.
         """
-        self.corpus_embeddings = np.load(embeddings_filename)
-        with open(corpus_filename, 'r', encoding='utf-8') as f:
-            self.corpus = [line.strip() for line in f.readlines()]
+        try:
+            self.corpus_embeddings = np.load(embeddings_filename)
+            with open(corpus_filename, 'r', encoding='utf-8') as f:
+                self.corpus = [line.strip() for line in f.readlines()]
+            print(f"Данные успешно загружены из {embeddings_filename} и {corpus_filename}")
+        except FileNotFoundError:
+            print(f"Файлы не найдены: пожалуйста, проверьте пути {embeddings_filename} и {corpus_filename}")
+        except Exception as e:
+            print(f"Ошибки при загрузке данных: {e}")

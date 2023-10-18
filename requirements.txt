@@ -6,3 +6,4 @@ numpy==1.23.5
 nltk==3.8.1
 pymorphy2==0.9.1
 scikit-learn==1.2.2
+flask==3.0.0

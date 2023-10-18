@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Добро пожаловать в поисковую систему!</h1>
+    <p>Чтобы начать поиск, нажмите на кнопку ниже.</p>
+    <!-- Используем url_for для генерации URL-адресов для view-функций -->
+    <a href="{{ url_for('search') }}"><button class="search-button">Перейти к поиску</button></a>
+{% endblock %}

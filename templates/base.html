@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Search Engine</title>
+    <!-- Ссылка на внешний файл стилей -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="header">
+        <!-- Навигационные ссылки в шапке -->
+        <div>
+            <a href="{{ url_for('index') }}">Главная страница</a>
+            <a href="{{ url_for('search') }}">Поиск</a>
+        </div>
+    </div>
+    
+    <div class="container">
+        <!-- Основное содержимое страниц будет здесь -->
+        {% block content %}{% endblock %}
+    </div>
+
+    <div class="footer">
+        <!-- Содержимое футера (можете добавить ссылки или информацию о копирайте) -->
+        <p>© 2023 Document Search Engine</p>
+    </div>
+    <!-- <script src="/static/main.js"></script> -->
+</body>
+</html>

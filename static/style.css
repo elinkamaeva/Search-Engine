@@ -1,0 +1,134 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    }
+
+.header, .footer {
+    position: fixed;
+    width: 100%;
+    background-color: #808080;
+    color: white;
+    height: 60px; /* Установите высоту по вашему желанию */
+    display: flex;
+    align-items: center; /* Это выровняет содержимое по вертикали */
+    justify-content: space-between; /* Если вы хотите распределить содержимое */
+}
+
+.header {
+    top: 0; /* Шапка закреплена в верхней части */
+    display: flex;
+    justify-content: flex-start; /* Элементы выравниваются по началу контейнера */
+    padding: 0 10px;
+}
+        
+.footer {
+    padding: 10px 0; /* Отступы сверху и снизу */
+    bottom: 0; /* Футер закреплен в нижней части */
+}
+        
+.header a {
+    color: white;
+    text-decoration: none;
+    margin-right: 20px; /* Отступ между элементами */
+    transition: color 0.3s; /* Плавное изменение цвета текста при наведении */
+}
+
+.header a:hover {
+    color: #8fd1e7; /* Цвет текста при наведении */
+}
+        
+.container {
+    padding: 60px 20px;  /* Увеличенный отступ сверху из-за фиксированной шапки */
+}
+        
+.footer p {
+    margin: 0; /* Убираем внешний отступ */
+    padding-left: 10px; /* Отступ слева */
+}
+
+/* Стиль кнопок */
+.search-button {
+    background-color: #8fd1e7; /* нежно-голубой */
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px; /* Закругление краев */
+    transition-duration: 0.4s;
+}
+        
+.search-button:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid #8fd1e7; /* Граница при наведении */
+}
+
+/* Стиль формы поиска */
+.form-input {
+    padding: 10px;
+    width: 300px;
+    border: none; /* Убираем обводку */
+    border-radius: 12px; /* Закругление, как у кнопок */
+    margin-bottom: 10px; /* Отступ снизу */
+}
+        
+.form-select {
+    padding: 10px;
+    width: 320px;
+    border: none; /* Убираем обводку */
+    border-radius: 12px; /* Закругление, как у кнопок */
+    margin-bottom: 10px; /* Отступ снизу */
+}
+        
+.form-button {
+    margin-top: 20px; /* Добавляем отступ сверху для кнопки */
+    padding: 10px 20px;
+    background-color: #8fd1e7; /* Нежно-голубой цвет, как у кнопок */
+    color: black; /* Цвет текста */
+    border: none; /* Убираем обводку */
+    border-radius: 12px; /* Закругление, как у кнопок */
+    cursor: pointer; /* Курсор в виде руки при наведении */
+    transition-duration: 0.4s; /* Длительность эффекта перехода */
+}
+        
+.form-button:hover {
+    background-color: white; /* Цвет фона при наведении */
+    color: black; /* Цвет текста при наведении */
+    border: 2px solid #8fd1e7; /* Граница при наведении */
+}
+
+/* Стиль для страницы с результатами */
+.search-result {
+    border: 1px solid #ddd; /* Рамка вокруг результатов */
+    padding: 15px;
+    margin-bottom: 10px; /* Расстояние между результатами */
+    border-radius: 5px; /* Скругленные углы */
+    background-color: #f8f8f8; /* Цвет фона каждого результата */
+}
+        
+.search-result h2 {
+    margin-top: 0;
+    color: #5a5a5a; /* Цвет заголовка */
+}
+        
+.search-result p {
+    color: #707070; /* Цвет текста описания */
+}
+
+ul {
+    list-style-type: none; /* Убирает стандартные маркеры у элементов списка */
+    padding-left: 0; /* Убирает отступ слева, который часто добавляется браузером по умолчанию */
+}
+
+.button-container {
+    border-bottom: 2px solid #ddd; /* Добавляет границу снизу */
+    padding-bottom: 20px; /* Добавляет немного пространства между кнопкой и границей */
+    margin-bottom: 20px; /* Добавляет пространство между границей и следующим элементом (если он есть) */
+}

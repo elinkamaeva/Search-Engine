@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Результаты поиска для "{{ query }}"</h1>
+    <p>Время поиска: {{ time }} секунд</p>
+    <!-- Вывод результатов поиска -->
+    {% if results|length > 0 %}
+        <ul>
+        {% for result in results %}
+            <li class="search-result">{{ result }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>К сожалению, по вашему запросу ничего не найдено.</p>
+    {% endif %}
+    <!-- Кнопка для возврата к поиску -->
+    <div class="button-container">
+        <a href="{{ url_for('search') }}"><button class="search-button">Вернуться к поиску</button></a>
+    </div>
+{% endblock %}
