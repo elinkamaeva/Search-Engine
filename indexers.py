@@ -1,7 +1,7 @@
 import numpy as np
 import time
 import pickle
-from typing import List, Optional, Union, Tuple, Type
+from typing import List, Optional, Union, Tuple, Type, Any
 from scipy.sparse import csr_matrix
 from rank_bm25 import BM25Okapi
 import gensim
@@ -21,16 +21,6 @@ nltk.download('stopwords')
 
 morph = pymorphy2.MorphAnalyzer()
 stops = set(stopwords.words('russian'))
-
-# Определение путей к файлам индексов и моделей
-BM25_PICKLE = "data/bm25_index.pkl"
-W2V_MODEL_PATH = "data/word2vec.bin"
-W2V_EMBEDDINGS = "data/w2v_embeddings.npy"
-FT_MODEL_PATH = "data/fasttext.model"
-FT_EMBEDDINGS = "data/ft_embeddings.npy"
-BERT_MODEL_PATH = "ai-forever/sbert_large_nlu_ru"
-BERT_EMBEDDINGS = "data/sbert_embeddings.npy"
-CORPUS_PATH = "data/corpus.txt"
 
 
 class BaseIndexer:
@@ -365,18 +355,18 @@ class VectorIndexer(BaseIndexer):
             self.load_pretrained_model()
             with open(corpus_filename, 'r', encoding='utf-8') as f:
                 self.corpus = [line.strip() for line in f.readlines()]
-            print(f"Данные успешно загружены из {embeddings_filename}, {model_filename}, и {corpus_filename}")
+            print(f"Данные успешно загружены из {embeddings_filename}, {model_filename} и {corpus_filename}")
         except FileNotFoundError:
-            print(f"Файлы не найдены: пожалуйста, проверьте пути {embeddings_filename}, {model_filename}, и {corpus_filename}")
+            print(f"Файлы не найдены: пожалуйста, проверьте пути {embeddings_filename}, {model_filename} и {corpus_filename}")
         except Exception as e:
             print(f"Ошибки при загрузке данных: {e}")
 
 class Word2VecIndexer(VectorIndexer):
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(model=Word2Vec, *args, **kwargs)
 
 class FastTextIndexer(VectorIndexer):
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(model=FastText, *args, **kwargs)
 
 
@@ -451,17 +441,3 @@ class BERTIndexer(BaseIndexer):
         self.corpus_embeddings = np.load(embeddings_filename)
         with open(corpus_filename, 'r', encoding='utf-8') as f:
             self.corpus = [line.strip() for line in f.readlines()]
-
-
-# Инициализация и загрузка индексов при импорте модуля
-bm25_indexer = BM25Indexer()
-bm25_indexer.load_index(BM25_PICKLE)
-
-word2vec_indexer = Word2VecIndexer()
-word2vec_indexer.load_index(W2V_EMBEDDINGS, W2V_MODEL_PATH, CORPUS_PATH)
-
-fasttext_indexer = FastTextIndexer()
-fasttext_indexer.load_index(FT_EMBEDDINGS, FT_MODEL_PATH, CORPUS_PATH)
-
-bert_indexer = BERTIndexer(BERT_MODEL_PATH)
-bert_indexer.load_index(BERT_EMBEDDINGS, CORPUS_PATH)
