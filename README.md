@@ -43,7 +43,7 @@ pip install -r requirements.txt
 
 2. Для запуска инструмента поиска через командную строку используйте следующую команду:
 ```bash
-python main.py "your query" --indexer=indexer_type
+python3 main.py "your query" --indexer=indexer_type
 ```
 
 ### Параметры:
@@ -52,7 +52,7 @@ python main.py "your query" --indexer=indexer_type
 
 Пример:
 ```bash
-python main.py "искусственный интеллект" --indexer=bm25
+python3 main.py "искусственный интеллект" --indexer=bm25
 ```
 Этот пример ищет документы, связанные с "искусственным интеллектом", используя индексатор BM25.
 
