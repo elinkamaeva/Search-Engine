@@ -1,0 +1,20 @@
+# Используйте официальный образ Python как родительский образ
+FROM python:3.8-slim
+
+# Установите рабочий каталог в контейнере
+WORKDIR /app
+
+# Скопируйте файлы проекта в рабочий каталог
+COPY data static templates app.py indexers.py requirements.txt /app/
+
+# Установите необходимые зависимости
+RUN pip install --trusted-host pypi.python.org -r requirements.txt
+
+# Загрузите необходимые NLTK данные
+RUN python -c "import nltk; from nltk.tokenize import word_tokenize; from nltk.corpus import stopwords; nltk.download('punkt'); nltk.download('stopwords')"
+
+# Сделайте порт 80 доступным для мира снаружи контейнера
+EXPOSE 5000
+
+# Запустите приложение
+CMD ["python", "./app.py"]

@@ -35,7 +35,6 @@ indexers = {
     'bert': bert_indexer
 }
 
-
 @app.route('/')
 def index():
     return render_template('index.html')  # здесь будет ваше основное описание и кнопка для перехода на страницу поиска
@@ -62,4 +61,4 @@ def results():
     return render_template('results.html', query=search_query, results=results, time=search_time)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=5000)

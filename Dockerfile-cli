@@ -1,0 +1,17 @@
+# Используйте официальный образ Python как родительский образ
+FROM python:3.8-slim
+
+# Установите рабочий каталог в контейнере
+WORKDIR /cli
+
+# Скопируйте файлы проекта в рабочий каталог
+COPY data main.py indexers.py requirements.txt /cli/
+
+# Установите необходимые зависимости
+RUN pip install --trusted-host pypi.python.org -r requirements.txt
+
+# Загрузите необходимые NLTK данные
+RUN python -c "import nltk; from nltk.tokenize import word_tokenize; from nltk.corpus import stopwords; nltk.download('punkt'); nltk.download('stopwords')"
+
+# Запустите CLI приложение
+CMD ["python", "./main.py"]

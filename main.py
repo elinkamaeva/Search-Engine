@@ -11,19 +11,6 @@ BERT_MODEL_PATH = "ai-forever/sbert_large_nlu_ru"
 BERT_EMBEDDINGS = "data/sbert_embeddings.npy"
 CORPUS_PATH = "data/corpus.txt"
 
-# Инициализация и загрузка индексов при импорте модуля
-bm25_indexer = BM25Indexer()
-bm25_indexer.load_index(BM25_PICKLE)
-
-word2vec_indexer = Word2VecIndexer()
-word2vec_indexer.load_index(W2V_EMBEDDINGS, W2V_MODEL_PATH, CORPUS_PATH)
-
-fasttext_indexer = FastTextIndexer()
-fasttext_indexer.load_index(FT_EMBEDDINGS, FT_MODEL_PATH, CORPUS_PATH)
-
-bert_indexer = BERTIndexer(BERT_MODEL_PATH)
-bert_indexer.load_index(BERT_EMBEDDINGS, CORPUS_PATH)
-
 
 def main():
     parser = argparse.ArgumentParser(description="Search documents using different indexers.")
@@ -34,13 +21,17 @@ def main():
     
     # Выбор уже инициализированного и загруженного индексатора
     if args.indexer == "bm25":
-        selected_indexer = bm25_indexer
+        selected_indexer = BM25Indexer()
+        selected_indexer.load_index(BM25_PICKLE)
     elif args.indexer == "word2vec":
-        selected_indexer = word2vec_indexer
+        selected_indexer = Word2VecIndexer()
+        selected_indexer.load_index(W2V_EMBEDDINGS, W2V_MODEL_PATH, CORPUS_PATH)
     elif args.indexer == "fasttext":
-        selected_indexer = fasttext_indexer
+        selected_indexer = FastTextIndexer()
+        selected_indexer.load_index(FT_EMBEDDINGS, FT_MODEL_PATH, CORPUS_PATH)
     elif args.indexer == "bert":
-        selected_indexer = bert_indexer
+        selected_indexer = BERTIndexer(BERT_MODEL_PATH)
+        selected_indexer.load_index(BERT_EMBEDDINGS, CORPUS_PATH)
     
     # Выполнение поиска и вывод результатов
     top_docs = selected_indexer.search(args.query, top_n=3)
